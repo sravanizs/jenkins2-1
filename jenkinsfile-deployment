@@ -26,7 +26,7 @@ pipeline {
                 environment name: 'ENV', value: 'dev'
             }
             steps {
-                cat inv
+                git branch: 'main', url: 'https://github.com/sravanizelar/ansi.git'
             }
         }
 
