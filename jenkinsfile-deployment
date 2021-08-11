@@ -29,6 +29,9 @@ pipeline {
             }
             steps {
                 git branch: 'main', url: 'https://github.com/sravanizelar/ansi.git'
+                sh '''
+                    ansible-playbook -i inv roboshop.yml -t ${COMPONENT} -e COMPONENT=${COMPONENT} -e ENV=${ENV} -e APP_VERSION=${VERSION} -e ansible_password=${UBUNTU_SSH_PASSWORD}
+                '''
             }
         }
 
