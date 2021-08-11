@@ -26,7 +26,7 @@ pipeline {
                 environment name: 'ENV', value: 'dev'
             }
             steps {
-                sh 'echo ansible-playbook .....'
+                cat inv
             }
         }
 
