@@ -3,6 +3,9 @@ pipeline {
         label "ANSIBLE"
     }
 
+    environment {
+        UBUNTU_SSH_PASSWORD = credentials('UBUNTU_SSH_PASSWORD')
+    }
 
     parameters {
         choice(name: 'ENV', choices: ['dev', 'prod' ], description: 'Select Environment')
@@ -25,7 +28,10 @@ pipeline {
                 environment name: 'ENV', value: 'dev'
             }
             steps {
-                sh 'echo ansible-playbook .....'
+                git branch: 'main', url: 'https://github.com/Sravanizelar/ansi'
+                sh '''
+                    ansible-playbook -i inv todo.yml -t ${COMPONENT} -e COMPONENT=${COMPONENT} -e ENV=${ENV} -e APP_VERSION=${VERSION} -e ansible_password=${UBUNTU_SSH_PASSWORD}
+                '''
             }
         }
 
