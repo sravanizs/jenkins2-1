@@ -27,10 +27,7 @@ pipeline {
                 environment name: 'ENV', value: 'dev'
             }
             steps {
-                git branch: 'main', url: 'https://github.com/zsdevops01/ansible.git'
-                sh '''
-                    ansible-playbook -i inv roboshop.yml -t ${COMPONENT} -e COMPONENT=${COMPONENT} -e ENV=${ENV} -e APP_VERSION=${VERSION} -e ansible_password=${UBUNTU_SSH_PASSWORD}
-                '''
+                sh 'echo ansible-playbook .....'
             }
         }
 
